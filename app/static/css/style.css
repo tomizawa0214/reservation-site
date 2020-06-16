@@ -95,3 +95,8 @@ table {
 .form-control:focus {
   box-shadow: none;
 }
+
+.storelist img {
+  height: 150px;
+  object-fit: contain;
+}
