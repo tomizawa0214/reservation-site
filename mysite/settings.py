@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -106,6 +107,27 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+
+# 2020年の祝日
+PUBLIC_HOLIDAYS = [
+    datetime.date(year=2020, month=1, day=1),
+    datetime.date(year=2020, month=1, day=13),
+    datetime.date(year=2020, month=2, day=11),
+    datetime.date(year=2020, month=2, day=23),
+    datetime.date(year=2020, month=2, day=24),
+    datetime.date(year=2020, month=3, day=20),
+    datetime.date(year=2020, month=4, day=29),
+    datetime.date(year=2020, month=5, day=3),
+    datetime.date(year=2020, month=5, day=4),
+    datetime.date(year=2020, month=5, day=5),
+    datetime.date(year=2020, month=7, day=20),
+    datetime.date(year=2020, month=8, day=11),
+    datetime.date(year=2020, month=9, day=21),
+    datetime.date(year=2020, month=9, day=22),
+    datetime.date(year=2020, month=10, day=12),
+    datetime.date(year=2020, month=11, day=3),
+    datetime.date(year=2020, month=11, day=23),
+]
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)

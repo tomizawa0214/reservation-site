@@ -1,4 +1,5 @@
 from datetime import datetime, date, timedelta, time
+from django.conf import settings
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import localtime, make_aware
@@ -77,6 +78,7 @@ class CalendarView(View):
             'before': days[0] - timedelta(days=7),
             'next': days[-1] + timedelta(days=1),
             'today': today,
+            'public_holidays': settings.PUBLIC_HOLIDAYS,
         })
 
 class BookingView(View):

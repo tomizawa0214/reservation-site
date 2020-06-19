@@ -40,7 +40,9 @@
                 <tr>
                     <th></th>
                     {% for day in days %}
-                        {% if day.weekday == 5 %}
+                        {% if day in public_holidays %}
+                            <th scope="col" class="text-danger">{{ day | date:"d(D)" }}</th>
+                        {% elif day.weekday == 5 %}
                             <th scope="col" class="text-primary">{{ day | date:"d(D)" }}</th>
                         {% elif day.weekday == 6 %}
                             <th scope="col" class="text-danger">{{ day | date:"d(D)" }}</th>
