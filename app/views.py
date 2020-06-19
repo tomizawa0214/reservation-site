@@ -2,7 +2,7 @@ from datetime import datetime, date, timedelta, time
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import localtime, make_aware
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from app.models import Store, Staff, Booking
 from app.forms import BookingForm
 
@@ -110,7 +110,7 @@ class BookingView(View):
                 booking.tel = form.cleaned_data['tel']
                 booking.remarks = form.cleaned_data['remarks']
                 booking.save()
-                return redirect('store')
+                return redirect('thanks')
         
         return render(request, 'app/booking.html', {
             'staff_data': staff_data,
@@ -120,3 +120,6 @@ class BookingView(View):
             'hour': hour,
             'form': form,
         })
+
+class ThanksView(TemplateView):
+    template_name = 'app/thanks.html'
