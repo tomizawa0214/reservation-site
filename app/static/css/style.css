@@ -142,3 +142,8 @@ table {
 .form_wrap__2col {
   grid-template-columns: repeat(2, 1fr);
 }
+
+.mypage img {
+  height: 150px;
+  object-fit: contain;
+}
