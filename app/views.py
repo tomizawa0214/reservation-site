@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.timezone import localtime, make_aware
 from django.views.generic import View, TemplateView
+from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
 from app.models import Store, Staff, Booking
 from app.forms import BookingForm
@@ -176,3 +177,23 @@ class MyPageView(LoginRequiredMixin, View):
             'month': month,
             'day': day,
         })
+
+@require_POST
+def Holiday(request, year, month, day, hour):
+    staff_data = Staff.objects.get(id=request.user.id)
+    start_time = make_aware(datetime(year=year, month=month, day=day, hour=hour))
+    end_time = make_aware(datetime(year=year, month=month, day=day, hour= hour + 1))
+
+    # 休日追加
+    Booking.objects.create(
+        staff=staff_data,
+        start=start_time,
+        end=end_time,
+    )
+
+    start_date = date(year=year, month=month, day=day)
+    weekday = start_date.weekday()
+    # カレンダー日曜日開始
+    if weekday != 6:
+        start_date -= timedelta(days=weekday + 1)
+    return redirect('mypage', year=start_date.year, month=start_date.month, day=start_date.day)
